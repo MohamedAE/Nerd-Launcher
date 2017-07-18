@@ -30,17 +30,20 @@ public class NerdLauncherFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /*Set view*/
         View v = inflater.inflate(R.layout.fragment_nerd_launcher, container, false);
 
+        /*Set RecyclerView*/
         mRecyclerView =(RecyclerView) v.findViewById(R.id.fragment_nerd_launcher_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        /*Associate Fragment Adapter*/
         setupAdapter();
         return v;
     }
 
-    /* Creates RecyclerView.Adapter and sets it to mRecyclerView
-    *  */
+    /*Creates RecyclerView.Adapter and sets it to mRecyclerView
+    * Sits between RecyclerView and data to be displayed*/
     private void setupAdapter() {
         /*Generate an Intent and specify two parameters: ACTION_MAIN and CATEGORY_LAUNCHER
         * MAIN intent filters may not include CATEGORY*/
@@ -49,8 +52,10 @@ public class NerdLauncherFragment extends Fragment {
 
         /*Utilize PackageManager, return ResolveInfo object*/
         PackageManager pm = getActivity().getPackageManager();
+        /*Generate a list of applications*/
         List<ResolveInfo> activities = pm.queryIntentActivities(startupIntent, 0);
 
+        /*Sort list*/
         Collections.sort(activities, new Comparator<ResolveInfo>() {
             public int compare(ResolveInfo a, ResolveInfo b) {
                 PackageManager pm = getActivity().getPackageManager();
@@ -64,6 +69,7 @@ public class NerdLauncherFragment extends Fragment {
         mRecyclerView.setAdapter(new ActivityAdapter(activities));
     }
 
+    /*Describes an item view within RecyclerView; meta data on its place in the RV*/
     private class ActivityHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ResolveInfo mResolveInfo;
