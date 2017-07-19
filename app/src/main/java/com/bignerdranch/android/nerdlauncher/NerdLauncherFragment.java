@@ -35,7 +35,7 @@ public class NerdLauncherFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_nerd_launcher, container, false);
 
         /*Set RecyclerView*/
-        mRecyclerView =(RecyclerView) v.findViewById(R.id.fragment_nerd_launcher_recycler_view);
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_nerd_launcher_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         /*Associate Fragment Adapter*/
@@ -82,7 +82,7 @@ public class NerdLauncherFragment extends Fragment {
             super(itemView);
             mImageView = (ImageView) itemView.findViewById(R.id.list_item_icon);
             mNameTextView = (TextView) itemView.findViewById(R.id.list_item_text);
-            mNameTextView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         public void bindActivity(ResolveInfo resolveInfo) {
