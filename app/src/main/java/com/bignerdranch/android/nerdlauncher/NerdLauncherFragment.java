@@ -46,6 +46,7 @@ public class NerdLauncherFragment extends Fragment {
     * Sits between RecyclerView and data to be displayed*/
     private void setupAdapter() {
         /*Generate an Intent and specify two parameters: ACTION_MAIN and CATEGORY_LAUNCHER
+        * MAIN: locate all activities with MAIN intent-filters - an application's entry point
         * MAIN intent filters may not include CATEGORY*/
         Intent startupIntent = new Intent(Intent.ACTION_MAIN);
         startupIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -90,15 +91,17 @@ public class NerdLauncherFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+            /*Get the activity's ComponentName (package name and class name together)*/
             ActivityInfo activityInfo = mResolveInfo.activityInfo;
 
-            /*Get ComponentName (package name and class name together)*/
+            /*Generate an explicit intent (at runtime) to launch specified app*/
             Intent i = new Intent(Intent.ACTION_MAIN).setClassName(activityInfo.applicationInfo.packageName, activityInfo.name);
             startActivity(i);
         }
 
     }
 
+    /*Provide binding from data set to view displayed in RV*/
     private class ActivityAdapter extends RecyclerView.Adapter<ActivityHolder> {
 
         private final List<ResolveInfo> mActivities;
